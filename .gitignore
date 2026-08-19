@@ -1,0 +1,28 @@
+# Operating-system and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Logs, caches and generated runtime data
+*.log
+logs/
+cache/
+evaluation-results/
+node_modules/
+dist/
+
+# Local archives and temporary files
+*.zip
+*.7z
+*.rar
+*.tmp
+~$*
