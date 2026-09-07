@@ -12,11 +12,11 @@ FLAFA家庭飞行云台AI辅助拍摄Agent面向家庭内容创作者与普通�
 
 手机是主要成像设备，飞行云台用于扩展手机可到达的拍摄机位。整体方案围绕家庭持续记录设计，包括飞行云台原型、手机端App、AI拍摄Agent、多人跟拍、语音与手势交互、AI辅助剪辑与内容生成等能力。产品以横屏记录为主，同时支持竖屏拍摄。
 
-这一层描述的是完整产品方向，其中既包含已完成的软件与原型机能力，也包含验证中和规划中的模块；各模块的实际进度以“当前实现状态”为准。
-
 ### 当前仓库进度
 
 本公开仓库主要呈现Agent的软件架构、Context与记忆体系、真实模型接入、结构化ShootingPlan、确定性Planner、Runtime、Safety Supervisor、任务回滚、仿真环境和专项评测结果。完整业务源代码、运行凭据及内部工程资料保留在私有工程仓库。
+
+交互原型已迭代至 V8.5，本次完善了部分页面的视觉与交互呈现；Agent 软件及既有评测仍以已验证的 v8.4.0 为基线。
 
 > 核心边界：语言模型只生成高层拍摄策略、结构化ShootingPlan和候选ID，不直接生成真实坐标、速度、轨迹、避障决策或飞控指令。机位ID解析、可达性判断、安全裁决、任务编译与回退由确定性系统及后续硬件执行域负责。
 
@@ -26,6 +26,33 @@ FLAFA家庭飞行云台AI辅助拍摄Agent面向家庭内容创作者与普通�
 - 获奖后，项目继续推进AI拍摄Agent工程化、交互原型、模型接入和原型机验证，并非另行建立一个独立项目。
 - 当前v8.4.0已发展为包含React前端、`simulation-api`、真实模型接入、确定性Planner、Runtime、Safety Supervisor、回滚机制、仿真与专项评测的完整软件工程基线。
 - 下一阶段在保持Agent权限边界与安全机制的前提下，继续推进真实飞控、定位、路径、避障及完整硬件闭环。
+
+## 交互原型预览
+
+V8.5交互原型，界面及数据均为演示用途。截图取自实际运行界面：方案预览由视觉模型生成，需求规划与任务执行采用本地仿真，不连接真实设备；点击图片可查看高清原图。
+
+<table>
+  <tr>
+    <td align="center" valign="top" width="50%">
+      <a href="docs/assets/v8.5/home.png"><img src="docs/assets/v8.5/home.png" width="300" alt="V8.5首页：设备状态与AI拍摄助手入口"></a>
+      <p>1. 首页：查看设备状态与主要拍摄入口。</p>
+    </td>
+    <td align="center" valign="top" width="50%">
+      <a href="docs/assets/v8.5/ai-request.png"><img src="docs/assets/v8.5/ai-request.png" width="300" alt="V8.5需求确认：校对文字输入的拍摄需求"></a>
+      <p>2. 需求确认：校对文字输入的场景、时长与拍摄偏好。</p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" width="50%">
+      <a href="docs/assets/v8.5/shooting-plan.png"><img src="docs/assets/v8.5/shooting-plan.png" width="300" alt="V8.5拍摄方案：已生成的AI预览、目标、策略及确认入口"></a>
+      <p>3. 方案确认：查看AI预览、拍摄目标与策略，选择重新描述或确认并开始。</p>
+    </td>
+    <td align="center" valign="top" width="50%">
+      <a href="docs/assets/v8.5/execution-control.png"><img src="docs/assets/v8.5/execution-control.png" width="300" alt="V8.5任务控制演示：拍摄已暂停与继续拍摄指令"></a>
+      <p>4. 任务控制：工程自带演示呈现已暂停状态与“继续拍摄”指令，画面为内置演示素材。</p>
+    </td>
+  </tr>
+</table>
 
 ## 项目解决什么问题
 
@@ -130,14 +157,14 @@ FLAFA家庭飞行云台AI辅助拍摄Agent面向家庭内容创作者与普通�
 ```text
 .
 ├── README.md             # 项目总览、状态与能力边界
-├── docs/                 # 可编辑的Markdown技术资料
+├── docs/                 # Markdown技术资料与原型截图（assets/v8.5/）
 ├── pdf/                  # 固定版式阅读文件
 ├── CONTRIBUTING.md       # 文档反馈方式
 ├── SECURITY.md           # 安全问题报告方式
 └── NOTICE.md             # 项目声明
 ```
 
-本仓库用于介绍FLAFA v8.4.0的产品定位、Agent架构、Context与记忆体系、安全运行时、模型接入、评测方法及硬件接入边界。为保护工程实现与运行凭据，仓库不包含完整业务源代码、模型密钥、环境变量、原始模型响应、家庭数据、运行日志或视觉缓存。
+本仓库用于介绍FLAFA的产品定位、Agent架构、Context与记忆体系、安全运行时、模型接入、评测方法及硬件接入边界，并展示V8.5交互原型。为保护工程实现与运行凭据，仓库不包含完整业务源代码、模型密钥、环境变量、原始模型响应、家庭数据、运行日志或视觉缓存。
 
 公开资料与内部工程基线分开维护：本仓库负责对外说明；完整代码、测试夹具、安装与启动脚本、发布工具和运行配置保留在私有工程仓库。公开仓库本身不是可直接启动的软件分发包。
 
